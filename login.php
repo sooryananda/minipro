@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/style.css" /> 
-        <link rel="stylesheet" href="css/style1.css" /> 
+        <link rel="stylesheet" href="css/style2.css" /> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,9 +25,6 @@
 ?>
 <!---------------------------------->
 
-<div class="login-box">
-        <h1>Login</h1>
-    
         <?php
            if(isset($_POST["login"]))
            {
@@ -41,16 +38,23 @@
                   echo "<script>window.open('admin.php','_self');</script>";
               }
               else{
-                  echo "<div>Invalid Username or Password</div>";
+                 ?> <div class="success"><p><?php echo "Invalid Username or Password"; ?></p></div>
+                 <?php
               }
 
            }
            if(isset($_GET["mes"]))
            {
-               echo "<div class='error'>{$_GET["mes"]}</div>";
+              ?> <div class="success"><p><?php echo "{$_GET["mes"]}"; ?></p></div>
+              <?php
            }
         ?>
 
+
+
+<div class="login-box">
+        <h1>Login</h1>
+ 
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
             <label for="">Email</label>
             <input type="text" name="email_ad" placeholder="" required>

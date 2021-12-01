@@ -1,5 +1,5 @@
 <?php
- include ('include/database.php')
+ include ('include/database.php');
  session_start();
 
  unset ($_SESSION["AID"]);

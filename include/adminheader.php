@@ -1,10 +1,5 @@
 <?php
     include ('include/database.php');
-    session_start();
-    if(!isset($_SESSION["AID"]))
-    {
-        echo "<script>window.open('login.php?mes=access Denied..','_self');</script>";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/adminstyle.css">
+        <link rel="stylesheet" href="css/sellerstyle.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -27,19 +23,8 @@
              <nav class="main-nav">
              <ul class="main-nav-list">
                 <li class="size-nav">Hello admin |</li>
-                <li><a class="size-nav" href="admin.php">Home |</a></li>
-                <li><a class="size-nav" href="login.php">Logout</a></li>
+                <li><a class="size-nav" href="admin.php">Home</a></li>
              </ul>
           
          </nav>
         </header>
-      <?php include ('include/sidenav.php'); ?>
-
-      <div class="main">
-         <p>Manage Anything !!!</p>
-
-      </div>
-
-
-</body>
-</html> 

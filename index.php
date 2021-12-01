@@ -1,3 +1,9 @@
+<?php
+    include ('include/database.php');
+    session_start();
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,12 +36,6 @@
                 Quick delivery and 24*7 availability!!<br>
                 Forget Routine Medical shop trip!!!
             </p>
-            <p class="hero-description">
-                <div>
-                   <br> <a href="registration.php" class="btn"><b>Sign Up</b></a>
-                    <a href="#" class="btn">Learn more &darr;</a>
-                    </div>
-            </p>
             </div>
   
             <div class="hero-image-box">
@@ -50,48 +50,37 @@
       <div class="categories">
           <div class="small-container">
               <h2 class="title"><a id="shop">Featured Products</a></h2>
-         <form action="manage-cart.php" method="post"> 
+
+ <!------------------------------------------------------------------->  
+ 
+        <?php
+    
+        $s="select * from stationary";
+        $res=$db->query($s);
+        if($res->num_rows>0)
+        {
+            $i=0;
+            while($r=$res->fetch_assoc())
+            {
+                $i++; ?>
+
+         <form action="productdetails.php" method="post"> 
               <div class="row">
-              <div class="col-3"><a href="productdetails.php"><img src="images/mask.jpg"></a>
-             <h4>Surgical Mask</h4><p>Rs 50</p><br><button name="add-to-cart" type="submit" class="btn">Add to Cart</button>
-            <input type="hidden" name="item-name" value="mask">
-            <input type="hidden" name="price" value="50">
+              <div class="col-4"><a href="productdetails.php"><img src="uploadimg/<?php echo $r['img']; ?>"> </a>
+             <h3 class="hai"><?php echo $r["name"]; ?></h3>
+             <p>RS <?php echo $r["rate"]; ?></p><br>
+             <a href="productdetails.php?id=<?php echo $r["id"]; ?>" class="btn">View Details</a>
         </div>
         </form>
-         <form action="manage-cart.php" method="post">
-              <div class="col-3"><img src="images/sanitizer.jpg">
-                <h4>Hand sanitizer</h4><p>Rs 30</p><br><button name="add-to-cart" type="submit" class="btn">Add to Cart</button>
-            <input type="hidden" name="item-name" value="sanitiser">
-            <input type="hidden" name="price" value="30">
-         </div>
-        </form>
-         <form action="manage-cart.php" method="post">
-              <div class="col-3"><img src="images/face.jpg">
-                <h4>Face shield</h4><p>Rs 40</p><br><button name="add-to-cart" type="submit" class="btn">Add to Cart</button>
-            <input type="hidden" name="item-name" value="face-mask">
-            <input type="hidden" name="price" value="40">
-         </div>
-          </form>
-         </div>
-        </div>
+        <?php
+                    }
+                }
 
-      <div class="small-container">
-          <div class="row">
-              <div class="col-4"><img src="images/paste.jpg"><h4>Toothpaste</h4><p>Rs 35</p><br><a class="btn" href="manage-cart.php">Add to Cart</a></div>
-              <div class="col-4"><img src="images/brush.jpg"><h4>Toothbrush</h4><p>Rs 50</p><br><a class="btn" href="manage-cart.php">Add to Cart</a></div>
-              <div class="col-4"><img src="images/soap.jpg"><h4>Soap</h4><p>Rs 50</p><br><a class="btn" href="manage-cart.php">Add to Cart</a></div>
-              <div class="col-4"><img src="images/shampoo.jpg"><h4>Shampoo</h4><p>Rs 50</p><br><a class="btn" href="manage-cart.php">Add to Cart</a></div>
-          </div>
-      </div>
-
-      <div class="small-container">
-        <div class="row">
-            <div class="col-4"><img src="images/ensure.jpg"><h4>Ensure</h4><p>Rs 50</p><br><a class="btn" href="#">Add to Cart</a></div>
-            <div class="col-4"><img src="images/vicksvapor.jpg"><h4>Vicks vaporub</h4><p>Rs 50</p><br><a class="btn" href="#">Add to Cart</a></div>
-            <div class="col-4"><img src="images/pampers.jpg"><h4>Pampers</h4><p>Rs 50</p><br><a class="btn" href="#">Add to Cart</a></div>
-            <div class="col-4"><img src="images/pads.jpg"><h4>Santitary pads</h4><p>Rs 50</p><br><a class="btn" href="#">Add to Cart</a></div>
-        </div>
+            ?>
     </div>
+    </div>
+  </div>
+            </div>
     <br><br><br>
 <!---------------------MAIN PAGE ENDS------------------------------------->
 <!---------------------HOME DELIVERY STARTS------------------------------->
@@ -108,6 +97,7 @@
                 </div>
         </div>
     </div>
+           
 <!--------------------------HOME DELIVERY ENDS------------------------->
 <!--------------------------FOOTER STARTS------------------------------>
 <?php include('include/footer.php'); ?>

@@ -9,7 +9,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+        <meta productname="viewport" content="width=device-width, initial-scale=1.0" /> 
         <link rel="stylesheet" href="css/style.css" /> 
         <link rel="stylesheet" href="css/detail-css.css" /> 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
         
         if(isset($_GET["id"]))
         {
-        $s="select * from stationary where id={$_GET["id"]}";
+        $s="select * from products where id={$_GET["id"]}";
         $res=$db->query($s);
         if($res->num_rows>0)
         {
@@ -51,42 +51,13 @@
 
  <form action='<?php echo $_SERVER["REQUEST_URI"]; ?>' method="post">
       <table>
-        <tr><td colspan="2"><img class="image-1" src="uploadimg/<?php echo $r['img']; ?>"> </td></tr>
+        <tr><td colspan="2"><img class="image-1" src="uploadimage/<?php echo $r['img']; ?>"> </td></tr>
         <tr><td colspan="2"> <input type="submit" name="submit" value="Add to Cart">
-            <a class="btn" href="#">Buy Now</a><br><br>
-
-                  <?php
-
-                      $place="select * from places";
-                      $pl=mysqli_query($db,$place);
-                      if(mysqli_num_rows($pl)>0)
-                      {
-                        ?> 
-                        <label>Choose a Place nearby your Locality and check if item is Available</label>
-                          <select name="placename" required>
-                          <option value="">Choose place..</option>
-                          <?php
-                          foreach($pl as $row)
-                          {
-                            ?>
-                          <option value="<?php echo $row['PID']; ?>"><?php echo $row['placename']; ?></option>
-                          <?php } ?>
-                      </select>             
-                                
-                      <?php
-                      }
-                      else
-                      {
-                          echo "No data Available";
-                        
-                      }
-               ?>
-          
-                    </td></tr>
-        <tr><td>Price</td><td><?php echo $r["rate"]; ?></td></tr>
+            <a class="btn" href="#">Buy Now</a></td></tr>
+        <tr><td>Price</td><td><?php echo $r["price"]; ?></td></tr>
         <tr><td>Quantity</td><td><input type="number" name="quantity" required>
-          <input type="hidden" value="<?php echo $r["rate"]; ?>" name="rate">
-          <input type="hidden" value="<?php echo $r["name"]; ?>"name="name"></td> </tr>
+          <input type="hidden" value="<?php echo $r["price"]; ?>" name="rate">
+          <input type="hidden" value="<?php echo $r["productname"]; ?>" name="name"></td> </tr>
         <tr><td>Description</td><td><?php echo $r["description"]; ?></td></tr>
       </table>
 </form>
@@ -97,10 +68,10 @@
             ?>
 
 <?php
-    
+  
         if(isset($_POST["submit"])){
           if(isset($_SESSION["UID"]))
-          {
+         {
           if(isset($_SESSION["cart"])){
                $id_array=array_column($_SESSION["cart"],"id");
                if(!in_array($_GET["id"],$id_array)){
@@ -126,12 +97,12 @@
               );
               $_SESSION["cart"][0]=$item;
               echo "<script>alert('Product Added to Cart');</script>";
-              
-          }
-        }else{
-        header("Location:registration.php");
-      }
-       }
+          }  
+          }else{
+          header("Location:registration.php");
+        }
+        } 
+        
         ?>
 
 
@@ -146,8 +117,3 @@
 
 </body>
 </html>
-
-
-
-
-
